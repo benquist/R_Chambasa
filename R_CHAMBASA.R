@@ -39,10 +39,38 @@ dim(LeafChem)
 #summarize data
 hist(LeafChem$n15_delta)
 hist(LeafChem$chl_b)
-hist(LeafChem$chl_b)
+hist(LeafChem$delta_13c)
 
 #save as csv
 write.csv(trees_crowns, file="tree_crowns.csv")
 
+# install.packages ("ggplot2", dependencies = TRUE)
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("reshape2")
+
+#load libraries
+library(ggplot2)
+library(reshape2)
+library(ggthemes)
+library(plyr)
+
+#basic bivariate plot
+myplot <- ggplot(data=LeafChem, aes(x = p, y = n))
+summary(myplot)
+myplot + geom_point() 
+
+#color bivariate plot by plot
+ggplot(LeafChem, aes(n, p, color=plot_code)) + geom_point()
+ggplot(LeafChem, aes(lma, n_percent, color=plot_code)) + geom_point()
+
+#boxplot of trait values
+library(MASS)
+ggplot(LeafChem, aes(factor(plot_code), n))+ geom_boxplot()
+ggplot(LeafChem, aes(factor(plot_code), p))+ geom_boxplot()
+
+ggplot(iris, aes(n, p, color=plot_code)) + 
+  geom_point() +
+  facet_grid(plot_code ~ .) 
 
 
