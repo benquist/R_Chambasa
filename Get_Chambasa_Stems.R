@@ -1,12 +1,9 @@
 
-##############
+#######################
 # BJEnquist
-# extract CHAMBASA stems file
+# extract CHAMBASA stems file to merge with traits
 #
 ################
-
-
-source('~/R_CHAMBASA/R_CHAMBASA/R_Chambasa_BIEN_Traits.R')
 
 library(gemtraits)
 library(devtools)
@@ -27,8 +24,10 @@ table(ChambasaTreeSizes$plot_code)
 names(ChambasaTreeSizes)
 head(ChambasaTreeSizes)
 
+#remove duplicated stems
 trees_sm = ChambasaTreeSizes[order(ChambasaTreeSizes$census_id, decreasing = T),]
 trees_sm = trees_sm[!duplicated(paste(trees_sm$plot_code, trees_sm$tree_code, sep="-")),]
 nrow(trees_sm)
 
+#export file
 write.csv(trees_sm, file="Chambasa_tree_stems.csv")
