@@ -23,7 +23,6 @@ table(data.in$Plot, !is.na(data.in$d13C))
 
 
 unique(data.in$plot_code)
-
 #number of tree observations in CHAMBASA plots
 dim(data.in)
 #number of genus-level traits
